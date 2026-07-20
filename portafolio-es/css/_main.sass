@@ -34,52 +34,156 @@
                     width: 90%
                     margin: 0 auto
     .proyectos
-        padding: 3rem 0
-        margin-bottom: 3rem
-        .contenedor-proyectos
-            display: grid
-            justify-content: center
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
-            grid-column-gap: 2rem
-            grid-row-gap: 2rem
-            .proyecto
-                margin: auto
-                width: 250px
-                height: 350px
-                .info
-                    padding: 1rem .5rem
-                    height: 10.625rem
-                    background: $blanco
-                    color: $negro
-                    border: 0.125rem solid #969a97
-                    h4
-                        text-align: left
-                        margin-bottom: 2.5rem
-                        font-size: 1.3rem
-                    h5
-                        text-align: center
-                        margin-bottom: 1rem
-                        font-size: 1.1rem
-                        font-weight: normal
-                    p
-                        text-align: center
-                        font-size: .9rem
-                        font-weight: bold
-                        .html
-                            color: #854723
-                        .css
-                            color: #0571BA
-                        .javascript
-                            color: #958120
-                        .bootstrap
-                            color: #623F91
-                        .sass
-                            color: #CC6699
-                    .foto
-                        img
-                            width: 100%
-                            height: 11.25rem
-                            vertical-align: top
+    padding: 3rem 0
+    margin-bottom: 3rem
+
+    .contenedor-proyectos
+        display: flex !important
+        flex-wrap: wrap
+        justify-content: center
+        gap: 2rem 
+        max-width: 1140px 
+        margin: 0 auto
+
+        .proyecto
+            margin: 0
+            width: 250px
+            height: 350px /* Volvemos a fijar la altura para que la animación calce perfecta */
+            display: flex
+            flex-direction: column
+            flex-shrink: 0
+            position: relative /* Requerido para posicionar el botón y los detalles absolutos */
+            overflow: hidden /* Esconde la descripción larga mientras no esté activa */
+            border: 0.125rem solid #969a97
+
+            /* El checkbox real estará oculto pero encima del botón '+' para registrar los clics */
+            .toggle-proyecto
+                position: absolute
+                top: 10px
+                right: 10px
+                width: 30px
+                height: 30px
+                opacity: 0
+                z-index: 12
+                cursor: pointer
+
+            /* El botón '+' visual */
+            .cambio
+                position: absolute
+                top: 10px
+                right: 10px
+                width: 30px
+                height: 30px
+                background: #ff4b4b /* Puedes cambiarlo por tu variable de color rojo */
+                color: #ffffff
+                border-radius: 50%
+                display: flex
+                align-items: center
+                justify-content: center
+                font-size: 1.2rem
+                font-weight: bold
+                z-index: 11
+                transition: transform 0.3s ease, background 0.3s ease
+
+            /* CUANDO EL CHECKBOX SE ACTIVA: Giramos el '+' para convertirlo en una 'X' */
+            .toggle-proyecto:checked ~ .cambio
+                transform: rotate(135deg)
+                background: #333333
+
+            .foto
+                img
+                    width: 100%
+                    height: 11.25rem
+                    vertical-align: top
+                    object-fit: cover
+
+            .info
+                padding: 1rem .5rem
+                flex: 1
+                background: $blanco
+                color: $negro
+                display: flex
+                flex-direction: column
+                justify-content: space-between 
+
+                h4
+                    text-align: left
+                    margin-bottom: 1rem 
+                    font-size: 1.3rem
+                    word-break: normal
+
+                h5
+                    text-align: center
+                    margin-bottom: 0.5rem
+                    font-size: 1.1rem
+                    font-weight: normal
+
+                p
+                    text-align: center
+                    font-size: .9rem
+                    font-weight: bold
+                    
+                    // Colores de tus tecnologías
+                    .html
+                        color: #854723
+                    .css
+                        color: #0571BA
+                    .javascript
+                        color: #958120
+                    .bootstrap
+                        color: #623F91
+                    .sass
+                        color: #CC6699
+
+            /* PANEL DE DETALLES: Inicialmente escondido abajo (-100%) */
+            .detalles-proyecto
+                position: absolute
+                bottom: -100% 
+                left: 0
+                width: 100%
+                height: 100%
+                background: rgba(255, 255, 255, 0.98) /* Fondo casi sólido para tapar la tarjeta */
+                color: #000000
+                padding: 1.5rem 1rem
+                box-sizing: border-box
+                display: flex
+                flex-direction: column
+                justify-content: space-between
+                z-index: 10
+                transition: bottom 0.4s cubic-bezier(0.25, 1, 0.5, 1) /* Transición suave de deslizamiento */
+
+                h4
+                    font-size: 1.2rem
+                    border-bottom: 2px solid #969a97
+                    padding-bottom: 5px
+                    margin-bottom: 0.5rem
+
+                .descripcion-larga
+                    font-size: 0.85rem
+                    line-height: 1.4
+                    font-weight: normal
+                    text-align: justify
+                    overflow-y: auto /* Si tu texto es gigantesco, permitirá hacer scroll interno */
+                    margin-bottom: 1rem
+
+                .btn-enlace
+                    display: block
+                    text-align: center
+                    background: #000000
+                    color: #ffffff
+                    padding: 0.5rem
+                    text-decoration: none
+                    font-size: 0.9rem
+                    font-weight: bold
+                    border-radius: 4px
+                    transition: background 0.2s
+                    
+                    &:hover
+                        background: #333333
+
+            /* CUANDO EL CHECKBOX SE ACTIVA: Deslizamos el panel hacia arriba */
+            .toggle-proyecto:checked ~ .detalles-proyecto
+                bottom: 0
     .conocimientos
         min-height: 100vh
         background: $blanco 

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /** Media Queries **/
 html {
   box-sizing: border-box;
@@ -62,7 +63,6 @@ h1, h2, h3, h4, h5, h6, p {
   position: fixed;
   bottom: 1.25rem;
   right: 1.25rem;
-  z-index: 1;
 }
 
 /** Media Queries **/
@@ -78,7 +78,6 @@ h1, h2, h3, h4, h5, h6, p {
     display: grid;
     flex-direction: column;
   }
-
   .header {
     height: 100vh;
   }
@@ -245,64 +244,207 @@ h1, h2, h3, h4, h5, h6, p {
   width: 90%;
   margin: 0 auto;
 }
-.main .proyectos {
+.main {
   padding: 3rem 0;
   margin-bottom: 3rem;
 }
-.main .proyectos .contenedor-proyectos {
-  display: grid;
+.main .contenedor-proyectos {
+  display: flex !important;
+  flex-wrap: wrap;
   justify-content: center;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-column-gap: 2rem;
-  grid-row-gap: 2rem;
+  gap: 2rem;
+  max-width: 1140px;
+  margin: 0 auto;
 }
-.main .proyectos .contenedor-proyectos .proyecto {
-  margin: auto;
+.main .contenedor-proyectos .proyecto {
+  margin: 0;
   width: 250px;
   height: 350px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  border: 0.125rem solid #969a97;
+  /* El checkbox real estará oculto pero encima del botón '+' para registrar los clics */
 }
-.main .proyectos .contenedor-proyectos .proyecto .info {
+.main .contenedor-proyectos .proyecto .toggle-proyecto {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  opacity: 0;
+  z-index: 12;
+  cursor: pointer;
+}
+.main .contenedor-proyectos .proyecto {
+  /* El botón '+' visual */
+}
+.main .contenedor-proyectos .proyecto .cambio {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  background: #ff4b4b;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  z-index: 11;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.main .contenedor-proyectos .proyecto {
+  /* CUANDO EL CHECKBOX SE ACTIVA: Giramos el '+' para convertirlo en una 'X' */
+}
+.main .contenedor-proyectos .proyecto .toggle-proyecto:checked ~ .cambio {
+  transform: rotate(135deg);
+  background: #333333;
+}
+.main .contenedor-proyectos .proyecto .foto img {
+  width: 100%;
+  height: 11.25rem;
+  vertical-align: top;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.main .contenedor-proyectos .proyecto .info {
   padding: 1rem 0.5rem;
-  height: 10.625rem;
+  flex: 1;
   background: #ffffff;
   color: #000000;
-  border: 0.125rem solid #969a97;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.main .proyectos .contenedor-proyectos .proyecto .info h4 {
+.main .contenedor-proyectos .proyecto .info h4 {
   text-align: left;
-  margin-bottom: 2.5rem;
-  font-size: 1.3rem;
-}
-.main .proyectos .contenedor-proyectos .proyecto .info h5 {
-  text-align: center;
   margin-bottom: 1rem;
+  font-size: 1.3rem;
+  word-break: normal;
+}
+.main .contenedor-proyectos .proyecto .info h5 {
+  text-align: center;
+  margin-bottom: 0.5rem;
   font-size: 1.1rem;
   font-weight: normal;
 }
-.main .proyectos .contenedor-proyectos .proyecto .info p {
+.main .contenedor-proyectos .proyecto .info p {
   text-align: center;
   font-size: 0.9rem;
   font-weight: bold;
 }
-.main .proyectos .contenedor-proyectos .proyecto .info p .html {
+.main .contenedor-proyectos .proyecto .info p .html {
   color: #854723;
 }
-.main .proyectos .contenedor-proyectos .proyecto .info p .css {
+.main .contenedor-proyectos .proyecto .info p .css {
   color: #0571BA;
 }
-.main .proyectos .contenedor-proyectos .proyecto .info p .javascript {
+.main .contenedor-proyectos .proyecto .info p .javascript {
   color: #958120;
 }
-.main .proyectos .contenedor-proyectos .proyecto .info p .bootstrap {
+.main .contenedor-proyectos .proyecto .info p .bootstrap {
   color: #623F91;
 }
-.main .proyectos .contenedor-proyectos .proyecto .info p .sass {
+.main .contenedor-proyectos .proyecto .info p .sass {
   color: #CC6699;
 }
-.main .proyectos .contenedor-proyectos .proyecto .info .foto img {
+.main .contenedor-proyectos .proyecto .info p .ros2 {
+  color: #9d0000;
+}
+.main .contenedor-proyectos .proyecto .info p .python {
+  color: #03470f;
+}
+.main .contenedor-proyectos .proyecto .info p .yolov8 {
+  color: #aa9f0b;
+}
+.main .contenedor-proyectos .proyecto .info p .neuronales {
+  color: #035554;
+}
+.main .contenedor-proyectos .proyecto .info p .linux {
+  color: #000000;
+}
+.main .contenedor-proyectos .proyecto .info p .vision {
+  color: #aa5ed2;
+}
+.main .contenedor-proyectos .proyecto .info p .senales {
+  color: #c57331;
+}
+.main .contenedor-proyectos .proyecto .info p .dsp {
+  color: #69c94f;
+}
+.main .contenedor-proyectos .proyecto .info p .paralelo {
+  color: #fa007d;
+}
+.main .contenedor-proyectos .proyecto .info p .iot {
+  color: #006882;
+}
+.main .contenedor-proyectos .proyecto .info p .control {
+  color: #8a2109;
+}
+.main .contenedor-proyectos .proyecto .info p .sensores {
+  color: #4b10f0;
+}
+.main .contenedor-proyectos .proyecto .info p .robotica {
+  color: #297a10;
+}
+.main .contenedor-proyectos .proyecto {
+  /* PANEL DE DETALLES: Inicialmente escondido abajo (-100%) */
+}
+.main .contenedor-proyectos .proyecto .detalles-proyecto {
+  position: absolute;
+  bottom: -100%;
+  left: 0;
   width: 100%;
-  height: 11.25rem;
-  vertical-align: top;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.98);
+  color: #000000;
+  padding: 1.5rem 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 10;
+  transition: bottom 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.main .contenedor-proyectos .proyecto .detalles-proyecto h4 {
+  font-size: 1.2rem;
+  border-bottom: 2px solid #969a97;
+  padding-bottom: 5px;
+  margin-bottom: 0.5rem;
+}
+.main .contenedor-proyectos .proyecto .detalles-proyecto .descripcion-larga {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  font-weight: normal;
+  text-align: justify;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+.main .contenedor-proyectos .proyecto .detalles-proyecto .btn-enlace {
+  display: block;
+  text-align: center;
+  background: #000000;
+  color: #ffffff;
+  padding: 0.5rem;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+.main .contenedor-proyectos .proyecto .detalles-proyecto .btn-enlace:hover {
+  background: #333333;
+}
+.main .contenedor-proyectos .proyecto {
+  /* CUANDO EL CHECKBOX SE ACTIVA: Deslizamos el panel hacia arriba */
+}
+.main .contenedor-proyectos .proyecto .toggle-proyecto:checked ~ .detalles-proyecto {
+  bottom: 0;
 }
 .main .conocimientos {
   min-height: 100vh;
@@ -382,15 +524,20 @@ h1, h2, h3, h4, h5, h6, p {
   opacity: 1;
   transition-delay: 0.5s;
 }
+.main .conocimientos .contenedor .contenedor-conocimientos .tarjeta .detalles {
+  font-family: "Oswald", sans-serif;
+}
+.main .conocimientos .contenedor .contenedor-conocimientos .tarjeta .detalles p {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #ffffff;
+  line-height: 1.5rem;
+  letter-spacing: 1.6px;
+}
 .main .conocimientos .contenedor .contenedor-conocimientos .tarjeta .detalles h3 {
   margin-bottom: 0.3125rem;
   color: #ffffff;
   text-align: center;
-}
-.main .conocimientos .contenedor .contenedor-conocimientos .tarjeta .detalles p {
-  font-size: 0.9rem;
-  color: #ffffff;
-  line-height: 1.65;
 }
 .main .certificados {
   min-height: 100vh;
@@ -430,7 +577,7 @@ h1, h2, h3, h4, h5, h6, p {
   background: #f1f1f1;
   margin: 0 0.625rem;
   border-radius: 30%;
-  box-shadow: 0 0.3125rem 0.9375rem -0.3125rem #00000070;
+  box-shadow: 0 0.3125rem 0.9375rem -0.3125rem rgba(0, 0, 0, 0.4392156863);
   overflow: hidden;
   position: relative;
 }
@@ -444,6 +591,9 @@ h1, h2, h3, h4, h5, h6, p {
 }
 .footer .contenedor .redes-sociales .instagram {
   color: #bc2a8d;
+}
+.footer .contenedor .redes-sociales .telegram {
+  color: #0000FF;
 }
 .footer .contenedor .redes-sociales .twitter {
   color: #00acee;
@@ -472,6 +622,9 @@ h1, h2, h3, h4, h5, h6, p {
 }
 .footer .contenedor .redes-sociales .instagram::before {
   background: #bc2a8d;
+}
+.footer .contenedor .redes-sociales .telegram::before {
+  background: #0000FF;
 }
 .footer .contenedor .redes-sociales .twitter::before {
   background: #00acee;
@@ -520,7 +673,6 @@ h1, h2, h3, h4, h5, h6, p {
     display: grid;
     flex-direction: column;
   }
-
   .header {
     height: 100vh;
   }
@@ -544,6 +696,4 @@ h1, h2, h3, h4, h5, h6, p {
 }
 .main .proyectos .contenedor-proyectos .proyecto .foto a img:hover {
   filter: grayscale(100);
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
